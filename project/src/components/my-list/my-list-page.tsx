@@ -1,4 +1,4 @@
-function MyList() :JSX.Element {
+function MyListPage() :JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -186,4 +186,4 @@ function MyList() :JSX.Element {
   );
 }
 
-export default MyList;
+export default MyListPage;

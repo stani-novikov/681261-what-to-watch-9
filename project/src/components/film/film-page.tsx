@@ -1,4 +1,4 @@
-function Film(): JSX.Element {
+function FilmPage(): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -228,4 +228,4 @@ function Film(): JSX.Element {
   );
 }
 
-export default Film;
+export default FilmPage;

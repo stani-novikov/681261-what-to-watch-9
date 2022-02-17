@@ -1,4 +1,4 @@
-function AddReview(): JSX.Element {
+function AddReviewPage(): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -150,4 +150,4 @@ function AddReview(): JSX.Element {
   );
 }
 
-export default AddReview;
+export default AddReviewPage;

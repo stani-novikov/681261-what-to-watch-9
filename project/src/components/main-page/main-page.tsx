@@ -1,22 +1,12 @@
 import FilmCard from '../film-card/film-card';
 
-type MainPageProps = {
+type AppProps = {
   title: string,
   genre: string,
   year: number
 }
 
-function renderFilmCards () {
-  let i = 0;
-  const allCards = [];
-  while (i < 20) {
-    allCards.push(FilmCard());
-    i++;
-  }
-  return allCards;
-}
-
-function MainPage({title, genre, year}: MainPageProps): JSX.Element {
+function MainPage({title, genre, year}: AppProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -170,7 +160,7 @@ function MainPage({title, genre, year}: MainPageProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {renderFilmCards().map((card) => card)}
+            {new Array(20).fill(0).map((_, i) => <FilmCard key={i} />)/* eslint-disable-line react/no-array-index-key */}
           </div>
 
           <div className="catalog__more">

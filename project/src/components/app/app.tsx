@@ -1,12 +1,12 @@
 import MainPage from '../main-page/main-page';
 
-type MainPageProps = {
+type AppProps = {
   title: string,
   genre: string,
   year: number
 }
 
-function App({title, genre, year}: MainPageProps): JSX.Element {
+function App({title, genre, year}: AppProps): JSX.Element {
   return (
     <MainPage
       title={title}
