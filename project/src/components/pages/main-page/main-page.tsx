@@ -1,4 +1,4 @@
-import FilmCard from '../../components/film-card/film-card';
+import FilmCard from '../../film-card/film-card';
 
 type MainPageProps = {
   title: string,

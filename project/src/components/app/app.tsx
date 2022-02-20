@@ -1,12 +1,12 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import SignIn from '../../pages/sign-in/sign-in-page';
-import MyList from '../../pages/my-list/my-list-page';
-import Film from '../../pages/film/film-page';
-import Player from '../../pages/player/player-page';
-import AddReviewPage from '../../pages/add-review/add-review-page';
-import NotFoundPage from '../../pages/404/404-page';
-import MainPage from '../../pages/main-page/main-page';
+import SignIn from '../pages/sign-in-page/sign-in-page';
+import MyList from '../pages/my-list-page/my-list-page';
+import Film from '../pages/film-page/film-page';
+import Player from '../pages/player-page/player-page';
+import AddReviewPage from '../pages/add-review-page/add-review-page';
+import NotFoundPage from '../pages/404-page/404-page';
+import MainPage from '../pages/main-page/main-page';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
@@ -36,16 +36,16 @@ function App({title, genre, year}: AppProps): JSX.Element {
           }
         />
         <Route
-          path={`${AppRoute.Film}/:id`}
+          path={AppRoute.Film}
           element={<Film/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={`${<AddReviewPage/>}/:id/review`}
+          element={<AddReviewPage/>}
         />
         <Route
           path={AppRoute.Player}
-          element={`${<Player/>}/:id`}
+          element={<Player/>}
         />
         <Route
           path="*"
