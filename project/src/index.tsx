@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const AppProps = {
+const APP_PROPS = {
   title: 'The Grand Budapest Hotel',
   genre: 'Drama',
   year: 2014,
@@ -11,9 +11,9 @@ const AppProps = {
 ReactDOM.render(
   <React.StrictMode>
     <App
-      title={AppProps.title}
-      genre={AppProps.genre}
-      year={AppProps.year}
+      title={APP_PROPS.title}
+      genre={APP_PROPS.genre}
+      year={APP_PROPS.year}
     />
   </React.StrictMode>,
   document.getElementById('root'));

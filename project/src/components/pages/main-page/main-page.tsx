@@ -1,12 +1,12 @@
-import FilmCard from '../film-card/film-card';
+import FilmCard from '../../film-card/film-card';
 
-type AppProps = {
+type MainPageProps = {
   title: string,
   genre: string,
   year: number
 }
 
-function MainPage({title, genre, year}: AppProps): JSX.Element {
+function MainPage({title, genre, year}: MainPageProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
