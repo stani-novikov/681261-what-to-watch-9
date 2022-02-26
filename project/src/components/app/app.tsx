@@ -8,20 +8,22 @@ import AddReviewPage from '../pages/add-review-page/add-review-page';
 import NotFoundPage from '../pages/404-page/404-page';
 import MainPage from '../pages/main-page/main-page';
 import PrivateRoute from '../private-route/private-route';
+import {Films} from '../../types/films';
 
 type AppProps = {
   title: string,
   genre: string,
-  year: number
+  year: number,
+  films: Films,
 }
 
-function App({title, genre, year}: AppProps): JSX.Element {
+function App({title, genre, year, films}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage title={title} genre={genre} year={year} />}
+          element={<MainPage title={title} genre={genre} year={year} films={films} />}
         />
         <Route
           path={AppRoute.SignIn}
@@ -41,11 +43,11 @@ function App({title, genre, year}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewPage/>}
+          element={<AddReviewPage films={films} />}
         />
         <Route
           path={AppRoute.Player}
-          element={<Player/>}
+          element={<Player films={films}/>}
         />
         <Route
           path="*"

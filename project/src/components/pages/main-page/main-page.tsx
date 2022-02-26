@@ -1,12 +1,14 @@
-import FilmCard from '../../film-card/film-card';
+import {Films} from '../../../types/films';
+import FilmList from '../../film-list/film-list';
 
 type MainPageProps = {
   title: string,
   genre: string,
-  year: number
+  year: number,
+  films: Films
 }
 
-function MainPage({title, genre, year}: MainPageProps): JSX.Element {
+function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -160,7 +162,7 @@ function MainPage({title, genre, year}: MainPageProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(20).fill(0).map((_, i) => <FilmCard key={i} />)/* eslint-disable-line react/no-array-index-key */}
+            <FilmList films={films} />
           </div>
 
           <div className="catalog__more">

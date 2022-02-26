@@ -1,4 +1,10 @@
-function PlayerPage(): JSX.Element {
+import {Films} from '../../../types/films';
+
+type PlayerPageProps = {
+  films: Films
+}
+
+function PlayerPage({films}: PlayerPageProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">

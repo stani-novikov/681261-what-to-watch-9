@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import {films} from './mocks/films';
 
 const APP_PROPS = {
   title: 'The Grand Budapest Hotel',
@@ -14,6 +15,7 @@ ReactDOM.render(
       title={APP_PROPS.title}
       genre={APP_PROPS.genre}
       year={APP_PROPS.year}
+      films={films}
     />
   </React.StrictMode>,
   document.getElementById('root'));
