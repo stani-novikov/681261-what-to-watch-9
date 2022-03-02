@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 function MyListPage() :JSX.Element {
   return (
     <>
@@ -52,11 +54,11 @@ function MyListPage() :JSX.Element {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to="main.html" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <h1 className="page-title user-page__title">My list</h1>
@@ -84,9 +86,9 @@ function MyListPage() :JSX.Element {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of
+                <Link className="small-film-card__link" to="film-page.html">Fantastic Beasts: The Crimes of
                   Grindelwald
-                </a>
+                </Link>
               </h3>
             </article>
 
@@ -95,7 +97,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
+                <Link className="small-film-card__link" to="film-page.html">Bohemian Rhapsody</Link>
               </h3>
             </article>
 
@@ -104,7 +106,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
+                <Link className="small-film-card__link" to="film-page.html">Macbeth</Link>
               </h3>
             </article>
 
@@ -113,7 +115,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
+                <Link className="small-film-card__link" to="film-page.html">Aviator</Link>
               </h3>
             </article>
 
@@ -125,7 +127,7 @@ function MyListPage() :JSX.Element {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">We need to talk about Kevin</a>
+                <Link className="small-film-card__link" to="film-page.html">We need to talk about Kevin</Link>
               </h3>
             </article>
 
@@ -134,7 +136,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">What We Do in the Shadows</a>
+                <Link className="small-film-card__link" to="film-page.html">What We Do in the Shadows</Link>
               </h3>
             </article>
 
@@ -143,7 +145,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/revenant.jpg" alt="Revenant" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Revenant</a>
+                <Link className="small-film-card__link" to="film-page.html">Revenant</Link>
               </h3>
             </article>
 
@@ -152,7 +154,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/johnny-english.jpg" alt="Johnny English" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Johnny English</a>
+                <Link className="small-film-card__link" to="film-page.html">Johnny English</Link>
               </h3>
             </article>
 
@@ -162,7 +164,7 @@ function MyListPage() :JSX.Element {
                 <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175"/>
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Shutter Island</a>
+                <Link className="small-film-card__link" to="film-page.html">Shutter Island</Link>
               </h3>
             </article>
           </div>
@@ -170,11 +172,11 @@ function MyListPage() :JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to="main.html" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">

@@ -1,6 +1,6 @@
-import {Films} from '../types/films';
+import {Film} from '../types/films';
 
-export const films: Films = [
+export const films: Film[] = [
   {
     backgroundImage: 'https://9.react.pages.academy/static/film/background/Johnny_English.jpg',
     backgroundColor: '#F0DBA2',

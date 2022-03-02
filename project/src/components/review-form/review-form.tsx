@@ -1,15 +1,15 @@
-import {useState} from 'react';
-import RatingInput from './rating-input';
+import React, {useState} from 'react';
+import RatingInput from '../rating-input/rating-input';
 
 const RATING = [10,9,8,7,6,5,4,3,2,1];
 
 function ReviewForm(): JSX.Element {
-  const setRatingCount = useState(0)[1];
+  const [rating, setRating] = useState(0);
   const [text, setText] = useState('');
 
-  function textInputHandler(evt: any) {
+  const textInputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
     setText(evt.target.value);
-  }
+  };
 
   return (
     <div className="add-review">
@@ -17,7 +17,7 @@ function ReviewForm(): JSX.Element {
         <div className="rating">
           <div className="rating__stars">
             {
-              RATING.map((el) => <RatingInput value={el} key={el} changeHandler={setRatingCount} />)
+              RATING.map((el) => <RatingInput currentRating={rating} value={el} key={el} onChange={setRating} />)
             }
           </div>
         </div>

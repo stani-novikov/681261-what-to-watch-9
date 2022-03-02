@@ -1,12 +1,12 @@
-import {Film, Films} from '../../types/films';
+import {Film} from '../../types/films';
 import FilmCard from '../film-card/film-card';
 import {useState} from 'react';
 
-type FilmListProps = {
-  films: Films
+type FilmsListProps = {
+  films: Film[]
 }
 
-function FilmList({films}: FilmListProps): JSX.Element {
+function FilmsList({films}: FilmsListProps): JSX.Element {
 
   const [activeCardId, setActiveCardId] = useState(0);
 
@@ -21,10 +21,10 @@ function FilmList({films}: FilmListProps): JSX.Element {
           name={film.name}
           previewImage={film.previewImage}
           id={film.id}
-          hoverHandler={setActiveCardId}
+          onHover={setActiveCardId}
         />))}
     </>
   );
 }
 
-export default FilmList;
+export default FilmsList;

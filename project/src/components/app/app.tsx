@@ -2,19 +2,19 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import SignIn from '../pages/sign-in-page/sign-in-page';
 import MyList from '../pages/my-list-page/my-list-page';
-import Film from '../pages/film-page/film-page';
+import FilmPage from '../pages/film-page/film-page';
 import Player from '../pages/player-page/player-page';
 import AddReviewPage from '../pages/add-review-page/add-review-page';
 import NotFoundPage from '../pages/404-page/404-page';
 import MainPage from '../pages/main-page/main-page';
 import PrivateRoute from '../private-route/private-route';
-import {Films} from '../../types/films';
+import {Film} from '../../types/films';
 
 type AppProps = {
   title: string,
   genre: string,
   year: number,
-  films: Films,
+  films: Film[],
 }
 
 function App({title, genre, year, films}: AppProps): JSX.Element {
@@ -39,7 +39,7 @@ function App({title, genre, year, films}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<Film/>}
+          element={<FilmPage/>}
         />
         <Route
           path={AppRoute.AddReview}

@@ -1,10 +1,11 @@
-import {Films} from '../../../types/films';
-import {Link, useParams} from 'react-router-dom';
+import {Film} from '../../../types/films';
+import {generatePath, Link, useParams} from 'react-router-dom';
 import NotFoundPage from '../404-page/404-page';
 import ReviewForm from '../../review-form/review-form';
+import {AppRoute} from '../../../const';
 
 type AddReviewPageProps = {
-  films: Films
+  films: Film[]
 }
 
 function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
@@ -75,7 +76,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
 
           <header className="page-header">
             <div className="logo">
-              <Link to={'/'} className="logo__link">
+              <Link to={AppRoute.Root} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -85,7 +86,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                  <Link to={generatePath(AppRoute.Film, {id: String(currentFilm.id)})} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -106,7 +107,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={currentFilm.posterImage} alt="The Grand Budapest Hotel poster" width="218"
+            <img src={currentFilm.posterImage} alt={currentFilm.name} width="218"
               height="327"
             />
           </div>

@@ -1,32 +1,30 @@
-import {Link} from 'react-router-dom';
+import {Link, generatePath} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 type FilmCardProps = {
-  previewImage: string
-  name: string
-  id: number
-  hoverHandler: (id: number) => void
+  previewImage: string;
+  name: string;
+  id: number;
+  onHover: (id: number) => void;
 }
 
-function FilmCard({previewImage, name, id, hoverHandler}: FilmCardProps): JSX.Element {
-
-  function onMouseOverHandler() {
-    hoverHandler(id);
-  }
+function FilmCard({previewImage, name, id, onHover}: FilmCardProps): JSX.Element {
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseOver={onMouseOverHandler}
+      onMouseOver={() => {onHover(id);}}
+      onMouseLeave={() => {onHover(0);}}
     >
       <div className="small-film-card__image">
         <img src={previewImage}
-          alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"
+          alt={name} width="280" height="175"
         />
       </div>
       <h3 className="small-film-card__title">
         <Link
           className="small-film-card__link"
-          to={`/films/${id}`}
+          to={generatePath(AppRoute.Film, {id: String(id)})}
         >
           {name}
         </Link>
