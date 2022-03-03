@@ -1,4 +1,19 @@
-function PlayerPage(): JSX.Element {
+import {Film} from '../../../types/films';
+import {useParams} from 'react-router-dom';
+import NotFoundPage from '../404-page/404-page';
+
+type PlayerPageProps = {
+  films: Film[]
+}
+
+function PlayerPage({films}: PlayerPageProps): JSX.Element {
+  const params = useParams();
+  const currentFilm = films.find((film) => film.id === Number(params.id));
+
+  if (!currentFilm) {
+    return <NotFoundPage />;
+  }
+
   return (
     <>
       <div className="visually-hidden">
@@ -50,7 +65,7 @@ function PlayerPage(): JSX.Element {
       </div>
 
       <div className="player">
-        <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+        <video src="#" className="player__video" poster={currentFilm.posterImage}></video>
 
         <button type="button" className="player__exit">Exit</button>
 

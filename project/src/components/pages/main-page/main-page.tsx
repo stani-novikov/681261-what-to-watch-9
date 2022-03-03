@@ -1,12 +1,15 @@
-import FilmCard from '../../film-card/film-card';
+import {Film} from '../../../types/films';
+import FilmsList from '../../film-list/film-list';
+import {Link} from 'react-router-dom';
 
 type MainPageProps = {
   title: string,
   genre: string,
-  year: number
+  year: number,
+  films: Film[]
 }
 
-function MainPage({title, genre, year}: MainPageProps): JSX.Element {
+function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -128,39 +131,39 @@ function MainPage({title, genre, year}: MainPageProps): JSX.Element {
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <Link to="#" className="catalog__genres-link">All genres</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <Link to="#" className="catalog__genres-link">Comedies</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <Link to="#" className="catalog__genres-link">Crime</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <Link to="#" className="catalog__genres-link">Documentary</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <Link to="#" className="catalog__genres-link">Dramas</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <Link to="#" className="catalog__genres-link">Horror</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <Link to="#" className="catalog__genres-link">Kids & Family</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <Link to="#" className="catalog__genres-link">Romance</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <Link to="#" className="catalog__genres-link">Sci-Fi</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <Link to="#" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(20).fill(0).map((_, i) => <FilmCard key={i} />)/* eslint-disable-line react/no-array-index-key */}
+            <FilmsList films={films} />
           </div>
 
           <div className="catalog__more">
