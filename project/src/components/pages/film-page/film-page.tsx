@@ -4,6 +4,8 @@ import {Film} from '../../../types/films';
 import {useParams} from 'react-router-dom';
 import NotFoundPage from '../404-page/404-page';
 import DetailFilmInfo from '../../detail-film-info/detail-film-info';
+import MoviePageReviews from '../../movie-page-reviews/movie-page-reviews';
+import {useState} from 'react';
 
 type FilmPageProps = {
   films: Film[];
@@ -13,10 +15,25 @@ function FilmPage(props: FilmPageProps): JSX.Element {
   const {films} = props;
   const params = useParams();
   const currentFilm = films.find((film) => film.id === Number(params.id));
+  const [activeTab, setActiveTab] = useState('Overview');
 
   if (!currentFilm) {
     return <NotFoundPage />;
   }
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'Overview':
+        return <OverviewFilmInfo film={currentFilm}/>;
+        break;
+      case 'Details':
+        return <DetailFilmInfo/>;
+        break;
+      case 'Reviews':
+        return <MoviePageReviews/>;
+        break;
+    }
+  };
 
   return (
     <>
@@ -136,9 +153,11 @@ function FilmPage(props: FilmPageProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <TabsBar/>
-              <OverviewFilmInfo film={currentFilm}/>
-              <DetailFilmInfo/>
+              <TabsBar
+                onChangeTab={(currentTab) => {setActiveTab(currentTab);}}
+                activeTab={activeTab}
+              />
+              {renderTabContent()}
             </div>
           </div>
         </div>

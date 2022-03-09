@@ -1,10 +1,14 @@
 import Tab from './tab';
-import {useState} from 'react';
+
+type TapBarProps = {
+  activeTab: string;
+  onChangeTab: (currentTab: string) => void;
+}
 
 const TABS = ['Overview', 'Details', 'Reviews'];
 
-function  TabsBar():JSX.Element {
-  const [activeTab, setActiveTab] = useState('Overview');
+function  TabsBar(props: TapBarProps):JSX.Element {
+  const {activeTab, onChangeTab} = props;
 
   return (
     <nav className="film-nav film-card__nav">
@@ -13,7 +17,7 @@ function  TabsBar():JSX.Element {
           (
             <Tab
               key={tab}
-              setActiveTab={setActiveTab}
+              setActiveTab={onChangeTab}
               activeTab={activeTab}
             >
               {tab}
