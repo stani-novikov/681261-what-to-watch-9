@@ -1,6 +1,6 @@
 import {Link, generatePath} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import VideoPlayer from '../videoplayer/videoPlayer';
+import Videoplayer from '../videoplayer/videoplayer';
 import {Film} from '../../types/films';
 import {useState} from 'react';
 
@@ -13,12 +13,12 @@ function FilmCard(props: FilmCardProps): JSX.Element {
   const {film, setActiveCard} = props;
   const [isPlaying, setPlayState] = useState(false);
 
-  const onMouseOver = () => {
+  const handleCardMouseOver = () => {
     setActiveCard(film.id);
     setPlayState(true);
   };
 
-  const onMouseLeave = () => {
+  const handleCardMouseLeave = () => {
     setActiveCard(0);
     setPlayState(false);
   };
@@ -26,11 +26,11 @@ function FilmCard(props: FilmCardProps): JSX.Element {
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseOver={() => {onMouseOver();}}
-      onMouseLeave={() => {onMouseLeave();}}
+      onMouseOver={() => {handleCardMouseOver();}}
+      onMouseLeave={() => {handleCardMouseLeave();}}
     >
       <div className="small-film-card__image">
-        <VideoPlayer
+        <Videoplayer
           previewVideoLink={film.previewVideoLink}
           previewImage={film.previewImage}
           isPlaying={isPlaying}
