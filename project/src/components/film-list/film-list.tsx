@@ -18,10 +18,8 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
       {films.map((film: Film) => (
         <FilmCard
           key={film.id}
-          name={film.name}
-          previewImage={film.previewImage}
-          id={film.id}
-          onHover={setActiveCardId}
+          film={film}
+          setActiveCard={setActiveCardId}
         />))}
     </>
   );
