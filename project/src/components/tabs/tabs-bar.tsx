@@ -1,13 +1,15 @@
 import Tab from './tab';
+import {Dispatch, SetStateAction} from 'react';
 
-type TapBarProps = {
+type TabsBarProps = {
   activeTab: string;
-  onChangeTab: (currentTab: string) => void;
+  onChangeTab: Dispatch<SetStateAction<TabName>>;
 }
+type TabName = 'Overview' | 'Details' | 'Reviews';
 
-const TABS = ['Overview', 'Details', 'Reviews'];
+const TABS:TabName[] = ['Overview', 'Details', 'Reviews'];
 
-function  TabsBar(props: TapBarProps):JSX.Element {
+function  TabsBar(props: TabsBarProps):JSX.Element {
   const {activeTab, onChangeTab} = props;
 
   return (
@@ -18,7 +20,7 @@ function  TabsBar(props: TapBarProps):JSX.Element {
             <Tab
               key={tab}
               setActiveTab={onChangeTab}
-              activeTab={activeTab}
+              isActive={activeTab === tab}
             >
               {tab}
             </Tab>),

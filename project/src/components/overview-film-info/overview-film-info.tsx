@@ -1,10 +1,10 @@
 import {Film} from '../../types/films';
 
-type DetailFilmInfoProps = {
+type OverviewFilmInfoProps = {
   film: Film
 }
 
-function OverviewFilmInfo(props:DetailFilmInfoProps):JSX.Element {
+function OverviewFilmInfo(props:OverviewFilmInfoProps):JSX.Element {
   const {rating, description, starring, director} = props.film;
   return (
     <>

@@ -6,16 +6,21 @@ import NotFoundPage from '../404-page/404-page';
 import DetailFilmInfo from '../../detail-film-info/detail-film-info';
 import MoviePageReviews from '../../movie-page-reviews/movie-page-reviews';
 import {useState} from 'react';
+import {reviews} from '../../../mocks/review';
+import FilmsList from '../../film-list/film-list';
+import {similarFilms} from '../../../mocks/similar';
 
 type FilmPageProps = {
   films: Film[];
 }
 
+type TabName = 'Overview' | 'Details' | 'Reviews';
+
 function FilmPage(props: FilmPageProps): JSX.Element {
   const {films} = props;
   const params = useParams();
   const currentFilm = films.find((film) => film.id === Number(params.id));
-  const [activeTab, setActiveTab] = useState('Overview');
+  const [activeTab, setActiveTab] = useState<TabName>('Overview');
 
   if (!currentFilm) {
     return <NotFoundPage />;
@@ -27,10 +32,10 @@ function FilmPage(props: FilmPageProps): JSX.Element {
         return <OverviewFilmInfo film={currentFilm}/>;
         break;
       case 'Details':
-        return <DetailFilmInfo/>;
+        return <DetailFilmInfo film={currentFilm}/>;
         break;
       case 'Reviews':
-        return <MoviePageReviews/>;
+        return <MoviePageReviews reviews={reviews}/>;
         break;
     }
   };
@@ -154,7 +159,7 @@ function FilmPage(props: FilmPageProps): JSX.Element {
 
             <div className="film-card__desc">
               <TabsBar
-                onChangeTab={(currentTab) => {setActiveTab(currentTab);}}
+                onChangeTab={setActiveTab}
                 activeTab={activeTab}
               />
               {renderTabContent()}
@@ -168,45 +173,7 @@ function FilmPage(props: FilmPageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
-              </h3>
-            </article>
+            <FilmsList films={similarFilms}/>
           </div>
         </section>
 
