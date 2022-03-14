@@ -1,5 +1,3 @@
-import {Review} from './review';
-
 type SimilarFilm = {
   name: string,
   posterImage: string,

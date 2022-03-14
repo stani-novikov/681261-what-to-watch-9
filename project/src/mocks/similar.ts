@@ -1,5 +1,6 @@
+import {SimilarFilms} from '../types/similar';
 
-export const similarFilms = [
+export const similarFilms: SimilarFilms = [
   {
     'name': 'War of the Worlds',
     'posterImage': 'https://9.react.pages.academy/static/film/poster/War_of_the_Worlds.jpg',
