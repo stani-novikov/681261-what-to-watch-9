@@ -17,7 +17,7 @@ export const films: Film[] = [
     released: 2003,
     runTime: 88,
     scoresCount: 136843,
-    starring: ['Rowan Atkinson', 'John Malkovich', 'Natal,ie Imbruglia'],
+    starring: ['Rowan Atkinson', 'John Malkovich', 'Natalie Imbruglia'],
     videoLink: 'https://9.react.pages.academy/static/film/video/bubbles.mp4',
   },
   {

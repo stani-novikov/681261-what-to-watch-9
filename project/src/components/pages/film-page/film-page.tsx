@@ -9,12 +9,11 @@ import {useState} from 'react';
 import {reviews} from '../../../mocks/review';
 import FilmsList from '../../film-list/film-list';
 import {similarFilms} from '../../../mocks/similar';
+import {TabName} from '../../../types/tabs';
 
 type FilmPageProps = {
   films: Film[];
 }
-
-type TabName = 'Overview' | 'Details' | 'Reviews';
 
 function FilmPage(props: FilmPageProps): JSX.Element {
   const {films} = props;

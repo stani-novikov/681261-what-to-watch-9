@@ -6,6 +6,17 @@ type OverviewFilmInfoProps = {
 
 function OverviewFilmInfo(props:OverviewFilmInfoProps):JSX.Element {
   const {rating, description, starring, director} = props.film;
+  const renderStarringList = () => {
+    const maxStarsCount = 4;
+    let result = starring.slice(0, maxStarsCount).join(', ');
+
+    if (starring.length > maxStarsCount) {
+      result += ' and other.';
+    }
+
+    return result;
+  };
+
   return (
     <>
       <div className="film-rating">
@@ -25,7 +36,7 @@ function OverviewFilmInfo(props:OverviewFilmInfoProps):JSX.Element {
 
         <p className="film-card__starring">
           <strong>
-            Starring: {starring.map((el) => el)}
+            Starring: {renderStarringList()}
           </strong>
         </p>
       </div>

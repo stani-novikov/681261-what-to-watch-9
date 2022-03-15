@@ -5,6 +5,15 @@ type DetailFilmInfoProps = {
 }
 
 function DetailFilmInfo({film}: DetailFilmInfoProps): JSX.Element {
+  const renderTime = (duration: number) => {
+    if (duration < 60) {
+      return `${duration}m`;
+    }
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    return `${hours}h ${minutes}m`;
+  };
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -16,7 +25,9 @@ function DetailFilmInfo({film}: DetailFilmInfoProps): JSX.Element {
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {
-              film.starring.map((el) => (el))
+              film.starring.map((el) =>
+                (el),
+              )
             }
           </span>
         </p>
@@ -25,7 +36,7 @@ function DetailFilmInfo({film}: DetailFilmInfoProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}m</span>
+          <span className="film-card__details-value">{renderTime(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

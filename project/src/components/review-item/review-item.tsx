@@ -5,7 +5,13 @@ type ReviewProps = {
 }
 function ReviewItem(props: ReviewProps):JSX.Element {
   const {review} = props;
-  const renderTime = (date: string) => new Date(date).toLocaleString();
+  const renderTime = (date: string) => {
+    const rawTime = new Date(date);
+    const month = rawTime.toLocaleString('en', {month: 'long'});
+    const day = rawTime.getDay();
+    const year = rawTime.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
   const time = renderTime(review.date);
 
   return (
@@ -17,7 +23,7 @@ function ReviewItem(props: ReviewProps):JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime={time}>{time}</time>
+          <time className="review__date" dateTime={review.date}>{time}</time>
         </footer>
       </blockquote>
 
