@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import {films} from './mocks/films';
 
 const APP_PROPS = {
   title: 'The Grand Budapest Hotel',
   genre: 'Drama',
   year: 2014,
 };
-
-const films = store.getState().filteredFilms;
 
 ReactDOM.render(
   <React.StrictMode>

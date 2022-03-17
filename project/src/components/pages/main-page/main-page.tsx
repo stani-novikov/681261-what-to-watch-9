@@ -1,6 +1,8 @@
 import {Film} from '../../../types/films';
 import FilmsList from '../../film-list/film-list';
 import FiltersList from '../../filters-list/filters-list';
+import {store} from '../../../store';
+import {useSelector} from 'react-redux';
 
 type MainPageProps = {
   title: string,
@@ -10,12 +12,23 @@ type MainPageProps = {
 }
 
 function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
+  const selectedGenre = useSelector((state: {genre: string}) => state.genre);
+
   const getGenresList = () => {
     const genres: string[] = [];
-    films.forEach((el) => {
+    store.getState().films.forEach((el) => {
       genres.push(el.genre);
     });
     return ['All genres', ...new Set(genres)];
+  };
+
+  const getFilteredFilms = () => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    if (selectedGenre === 'All genres') {
+      return films;
+    }
+    return  films.filter((el) => el.genre === selectedGenre);
   };
 
   return (
@@ -140,7 +153,7 @@ function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
           <FiltersList genres={getGenresList()} />
 
           <div className="catalog__films-list">
-            <FilmsList films={films} />
+            <FilmsList films={getFilteredFilms()} />
           </div>
 
           <div className="catalog__more">

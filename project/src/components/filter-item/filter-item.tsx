@@ -1,6 +1,6 @@
 import './style.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {changeGenre, sortFilmsByGenre} from '../../store/action';
+import {changeGenre} from '../../store/action';
 
 type FilterItemProps = {
   genre: string;
@@ -16,7 +16,6 @@ function FilterItem(props: FilterItemProps): JSX.Element {
       className={activeFilter === genre ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}
       onClick={(evt) => {
         dispatch(changeGenre(genre));
-        dispatch(sortFilmsByGenre());
       }}
     >
       <span className="catalog__genres-link">{genre}</span>
