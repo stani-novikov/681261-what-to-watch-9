@@ -1,6 +1,6 @@
 import {Film} from '../../../types/films';
 import FilmsList from '../../film-list/film-list';
-import {Link} from 'react-router-dom';
+import FiltersList from '../../filters-list/filters-list';
 
 type MainPageProps = {
   title: string,
@@ -10,6 +10,14 @@ type MainPageProps = {
 }
 
 function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
+  const getGenresList = () => {
+    const genres: string[] = [];
+    films.forEach((el) => {
+      genres.push(el.genre);
+    });
+    return ['All genres', ...new Set(genres)];
+  };
+
   return (
     <>
       <div className="visually-hidden">
@@ -129,38 +137,7 @@ function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <Link to="#" className="catalog__genres-link">All genres</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Comedies</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Crime</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Documentary</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Dramas</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Horror</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Kids & Family</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Romance</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Sci-Fi</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to="#" className="catalog__genres-link">Thrillers</Link>
-            </li>
-          </ul>
+          <FiltersList genres={getGenresList()} />
 
           <div className="catalog__films-list">
             <FilmsList films={films} />
