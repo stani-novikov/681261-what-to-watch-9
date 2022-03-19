@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import {Provider} from 'react-redux';
+import {store} from './store';
 import {films} from './mocks/films';
 
 const APP_PROPS = {
@@ -11,11 +13,13 @@ const APP_PROPS = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      title={APP_PROPS.title}
-      genre={APP_PROPS.genre}
-      year={APP_PROPS.year}
-      films={films}
-    />
+    <Provider store={store}>
+      <App
+        title={APP_PROPS.title}
+        genre={APP_PROPS.genre}
+        year={APP_PROPS.year}
+        films={films}
+      />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

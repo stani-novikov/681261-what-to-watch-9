@@ -9,6 +9,8 @@ import NotFoundPage from '../pages/404-page/404-page';
 import MainPage from '../pages/main-page/main-page';
 import PrivateRoute from '../private-route/private-route';
 import {Film} from '../../types/films';
+import { useDispatch } from 'react-redux';
+import { setFilms } from '../../store/action';
 
 type AppProps = {
   title: string,
@@ -18,6 +20,8 @@ type AppProps = {
 }
 
 function App({title, genre, year, films}: AppProps): JSX.Element {
+  const dispatch = useDispatch();
+  dispatch(setFilms(films));
   return (
     <BrowserRouter>
       <Routes>
