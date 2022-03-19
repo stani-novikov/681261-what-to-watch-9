@@ -1,8 +1,10 @@
 import {Film} from '../../../types/films';
 import FilmsList from '../../film-list/film-list';
 import FiltersList from '../../filters-list/filters-list';
-import {store} from '../../../store';
 import {useSelector} from 'react-redux';
+import { StoreState } from '../../../store/reducer';
+
+const fristGenreListItem = 'All genres';
 
 type MainPageProps = {
   title: string,
@@ -12,24 +14,18 @@ type MainPageProps = {
 }
 
 function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
-  const selectedGenre = useSelector((state: {genre: string}) => state.genre);
 
-  const getGenresList = () => {
-    const genres: string[] = [];
-    store.getState().films.forEach((el) => {
-      genres.push(el.genre);
-    });
-    return ['All genres', ...new Set(genres)];
-  };
+  const genres = useSelector((state: StoreState) => {
+    const filmGenres = state.films.map((el) => el.genre);
+    return [fristGenreListItem, ...new Set(filmGenres)];
+  });
 
-  const getFilteredFilms = () => {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    if (selectedGenre === 'All genres') {
+  const filteredFilms = useSelector((state: StoreState) => {
+    if (state.genre === 'All genres') {
       return films;
     }
-    return  films.filter((el) => el.genre === selectedGenre);
-  };
+    return  state.films.filter((el) => el.genre === state.genre);
+  });
 
   return (
     <>
@@ -150,10 +146,10 @@ function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FiltersList genres={getGenresList()} />
+          <FiltersList genres={genres} />
 
           <div className="catalog__films-list">
-            <FilmsList films={getFilteredFilms()} />
+            <FilmsList films={filteredFilms} />
           </div>
 
           <div className="catalog__more">
