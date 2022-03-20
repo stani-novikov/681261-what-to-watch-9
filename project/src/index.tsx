@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {films} from './mocks/films';
+import { fetchFilmsAction } from './store/api-actions';
 
 const APP_PROPS = {
   title: 'The Grand Budapest Hotel',
   genre: 'Drama',
   year: 2014,
 };
+
+store.dispatch(fetchFilmsAction());
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +20,6 @@ ReactDOM.render(
         title={APP_PROPS.title}
         genre={APP_PROPS.genre}
         year={APP_PROPS.year}
-        films={films}
       />
     </Provider>
   </React.StrictMode>,

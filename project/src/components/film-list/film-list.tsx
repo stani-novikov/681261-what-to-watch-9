@@ -1,6 +1,9 @@
 import {Film} from '../../types/films';
 import FilmCard from '../film-card/film-card';
 import {useState} from 'react';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../../store/reducer';
+import Spinner from '../spinner/spinner';
 
 type FilmsListProps = {
   films: Film[]
@@ -8,21 +11,23 @@ type FilmsListProps = {
 
 function FilmsList({films}: FilmsListProps): JSX.Element {
 
-  const [activeCardId, setActiveCardId] = useState(0);
+  const setActiveCardId = useState(0)[1];
+  const isFilmsLoaded = useSelector((state: StoreState) => state.isFilmsLoaded);
 
-  // eslint-disable-next-line no-console
-  console.log(activeCardId);
+  if (isFilmsLoaded) {
+    return (
+      <>
+        {films.map((film: Film) => (
+          <FilmCard
+            key={film.id}
+            film={film}
+            setActiveCard={setActiveCardId}
+          />))}
+      </>
+    );
+  }
 
-  return (
-    <>
-      {films.map((film: Film) => (
-        <FilmCard
-          key={film.id}
-          film={film}
-          setActiveCard={setActiveCardId}
-        />))}
-    </>
-  );
+  return <Spinner />;
 }
 
 export default FilmsList;

@@ -8,20 +8,17 @@ import AddReviewPage from '../pages/add-review-page/add-review-page';
 import NotFoundPage from '../pages/404-page/404-page';
 import MainPage from '../pages/main-page/main-page';
 import PrivateRoute from '../private-route/private-route';
-import {Film} from '../../types/films';
-import { useDispatch } from 'react-redux';
-import { setFilms } from '../../store/action';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../../store/reducer';
 
 type AppProps = {
   title: string,
   genre: string,
-  year: number,
-  films: Film[],
+  year: number
 }
 
-function App({title, genre, year, films}: AppProps): JSX.Element {
-  const dispatch = useDispatch();
-  dispatch(setFilms(films));
+function App({title, genre, year}: AppProps): JSX.Element {
+  const films = useSelector((state: StoreState) => state.films);
   return (
     <BrowserRouter>
       <Routes>
