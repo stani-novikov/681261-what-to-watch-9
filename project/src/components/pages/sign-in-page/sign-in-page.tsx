@@ -1,6 +1,30 @@
-import {Link} from 'react-router-dom';
+import { FormEvent, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom';
+import { AppRoute } from '../../../const';
+import { loginAction } from '../../../store/api-actions';
+import { AuthData } from '../../../types/user';
 
 function SignInPage(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+      navigate(AppRoute.Root);
+    }
+  };
   return  (
     <>
       <div className="visually-hidden">
@@ -65,17 +89,17 @@ function SignInPage(): JSX.Element {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
+          <form onSubmit={handleSubmit} className="sign-in__form">
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                  id="user-email"
+                  id="user-email" ref={loginRef}
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
                 <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                  id="user-password"
+                  id="user-password" ref={passwordRef}
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>

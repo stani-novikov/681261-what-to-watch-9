@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import SignIn from '../pages/sign-in-page/sign-in-page';
 import MyList from '../pages/my-list-page/my-list-page';
 import FilmPage from '../pages/film-page/film-page';
@@ -33,7 +33,7 @@ function App({title, genre, year}: AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute>
               <MyList/>
             </PrivateRoute>
           }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import { fetchFilmsAction } from './store/api-actions';
+import { checkAuthAction, fetchFilmsAction } from './store/api-actions';
 
 const APP_PROPS = {
   title: 'The Grand Budapest Hotel',
@@ -12,6 +12,7 @@ const APP_PROPS = {
 };
 
 store.dispatch(fetchFilmsAction());
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
