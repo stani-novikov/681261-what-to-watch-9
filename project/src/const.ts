@@ -18,3 +18,10 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout'
 }
+
+export enum LoginRequestStatus {
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+  Pending = 'PENDING',
+  IDLE = 'IDLE'
+}

@@ -1,6 +1,35 @@
-import {Link} from 'react-router-dom';
+import { FormEvent, useRef } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus, LoginRequestStatus} from '../../../const';
+import { loginAction } from '../../../store/api-actions';
+import {StoreState} from '../../../store/reducer';
+import Spinner from '../../spinner/spinner';
 
-function SignInPage(): JSX.Element {
+function SignInPage(): JSX.Element | null {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const loginRequestStatus = useSelector((state: StoreState) => state.loginRequestStatus);
+  const authorizationStatus = useSelector((state: StoreState) => state.authorizationStatus);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    navigate(AppRoute.Root);
+    return null;
+  } else if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Spinner/>;
+  }
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      }));
+    }
+  };
   return  (
     <>
       <div className="visually-hidden">
@@ -65,17 +94,20 @@ function SignInPage(): JSX.Element {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
+          {
+            loginRequestStatus === LoginRequestStatus.Error ? <p style={{'border': '1px solid red', 'padding': '5px'}}>Произошла ошибка, попробуйте снова</p> : ''
+          }
+          <form onSubmit={handleSubmit} className="sign-in__form">
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                  id="user-email"
+                  id="user-email" ref={loginRef}
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
                 <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                  id="user-password"
+                  id="user-password" ref={passwordRef}
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>

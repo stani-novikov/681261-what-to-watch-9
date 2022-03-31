@@ -3,6 +3,7 @@ import FilmsList from '../../film-list/film-list';
 import FiltersList from '../../filters-list/filters-list';
 import {useSelector} from 'react-redux';
 import { StoreState } from '../../../store/reducer';
+import UserBlock from '../../user-block/user-block';
 
 const fristGenreListItem = 'All genres';
 
@@ -96,16 +97,7 @@ function MainPage({title, genre, year, films}: MainPageProps): JSX.Element {
             </a>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__wrap">
