@@ -1,16 +1,25 @@
 import { FormEvent, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
-import {AppRoute, LoginRequestStatus} from '../../../const';
+import {AppRoute, AuthorizationStatus, LoginRequestStatus} from '../../../const';
 import { loginAction } from '../../../store/api-actions';
 import {StoreState} from '../../../store/reducer';
+import Spinner from '../../spinner/spinner';
 
-function SignInPage(): JSX.Element {
+function SignInPage(): JSX.Element | null {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const loginRequestStatus = useSelector((state: StoreState) => state.loginRequestStatus);
+  const authorizationStatus = useSelector((state: StoreState) => state.authorizationStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    navigate(AppRoute.Root);
+    return null;
+  } else if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Spinner/>;
+  }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -19,7 +28,6 @@ function SignInPage(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       }));
-      navigate(AppRoute.Root);
     }
   };
   return  (

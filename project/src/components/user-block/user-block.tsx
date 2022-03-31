@@ -4,12 +4,15 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { StoreState } from '../../store/reducer';
 import {logoutAction} from '../../store/api-actions';
 
+const DEFAULT_USER_AVATAR = 'img/avatar.jpg';
+
 function UserBlock(): JSX.Element {
   const dispatch = useDispatch();
   const authorizationStatus = useSelector((state: StoreState) => state.authorizationStatus);
   const logoutClickHandler = () => {
     dispatch(logoutAction());
   };
+  const userAvatar = localStorage.getItem('user-avatar');
   return (
     <ul className="user-block">
       {
@@ -17,7 +20,7 @@ function UserBlock(): JSX.Element {
           <>
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <img src={userAvatar ? userAvatar : DEFAULT_USER_AVATAR} alt="User avatar" width="63" height="63" />
               </div>
             </li>
             <li className="user-block__item">

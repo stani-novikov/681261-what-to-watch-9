@@ -4,7 +4,7 @@ import {APIRoute, AuthorizationStatus, LoginRequestStatus} from '../const';
 import {dropToken, saveToken} from '../services/helpers';
 import { Film } from '../types/films';
 import { AuthData, UserData } from '../types/user';
-import {setFilms, toggleFilmsLoadingFlag, requireAuthorization, changeLoginRequestStatus} from './action';
+import {setFilms, toggleFilmsLoadingFlag, requireAuthorization, changeLoginRequestStatus, setUserData} from './action';
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/films',
@@ -19,7 +19,7 @@ export const checkAuthAction = createAsyncThunk(
   'user/auth',
   async () => {
     await api.get(APIRoute.Login);
-    store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
   },
 );
 
@@ -27,8 +27,9 @@ export const loginAction = createAsyncThunk(
   'user/login',
   async ({ login: email, password }: AuthData) => {
     try {
-      const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-      saveToken(token);
+      const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+      saveToken(data.token);
+      store.dispatch(setUserData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(changeLoginRequestStatus(LoginRequestStatus.Success));
     } catch (err) {
