@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
-import { APIRoute, AuthorizationStatus } from '../const';
-import { saveToken } from '../services/helpers';
+import {APIRoute, AuthorizationStatus, LoginRequestStatus} from '../const';
+import {dropToken, saveToken} from '../services/helpers';
 import { Film } from '../types/films';
 import { AuthData, UserData } from '../types/user';
-import { setFilms, toggleFilmsLoadingFlag, requireAuthorization } from './action';
+import {setFilms, toggleFilmsLoadingFlag, requireAuthorization, changeLoginRequestStatus} from './action';
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/films',
@@ -26,8 +26,21 @@ export const checkAuthAction = createAsyncThunk(
 export const loginAction = createAsyncThunk(
   'user/login',
   async ({ login: email, password }: AuthData) => {
-    const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
-    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    try {
+      const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
+      saveToken(token);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(changeLoginRequestStatus(LoginRequestStatus.Success));
+    } catch (err) {
+      store.dispatch(changeLoginRequestStatus(LoginRequestStatus.Error));
+    }
+  },
+);
+
+export const logoutAction = createAsyncThunk('user/logout',
+  async () => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );

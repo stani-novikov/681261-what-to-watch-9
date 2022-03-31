@@ -1,27 +1,24 @@
 import { FormEvent, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import {AppRoute, LoginRequestStatus} from '../../../const';
 import { loginAction } from '../../../store/api-actions';
-import { AuthData } from '../../../types/user';
+import {StoreState} from '../../../store/reducer';
 
 function SignInPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const loginRequestStatus = useSelector((state: StoreState) => state.loginRequestStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      }));
       navigate(AppRoute.Root);
     }
   };
@@ -89,6 +86,9 @@ function SignInPage(): JSX.Element {
         </header>
 
         <div className="sign-in user-page__content">
+          {
+            loginRequestStatus === LoginRequestStatus.Error ? <p style={{'border': '1px solid red', 'padding': '5px'}}>Произошла ошибка, попробуйте снова</p> : ''
+          }
           <form onSubmit={handleSubmit} className="sign-in__form">
             <div className="sign-in__fields">
               <div className="sign-in__field">

@@ -1,13 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeGenre, setFilms, requireAuthorization, toggleFilmsLoadingFlag} from './action';
+import {changeGenre, setFilms, requireAuthorization, toggleFilmsLoadingFlag, changeLoginRequestStatus} from './action';
 import { Film } from '../types/films';
-import { AuthorizationStatus } from '../const';
+import {AuthorizationStatus, LoginRequestStatus} from '../const';
 
 export type StoreState = {
   genre: string;
   films: Film[];
   isFilmsLoaded: boolean;
   authorizationStatus: string;
+  loginRequestStatus: string;
 }
 
 const initialState: StoreState = {
@@ -15,6 +16,7 @@ const initialState: StoreState = {
   films: [],
   isFilmsLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  loginRequestStatus: LoginRequestStatus.IDLE,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -30,6 +32,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(changeLoginRequestStatus, (state, action) => {
+      state.loginRequestStatus = action.payload;
     });
 });
 
