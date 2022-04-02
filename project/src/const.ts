@@ -25,3 +25,16 @@ export enum LoginRequestStatus {
   Pending = 'PENDING',
   IDLE = 'IDLE'
 }
+
+export enum FilmRequestStatus {
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+  Pending = 'PENDING',
+  IDLE = 'IDLE'
+}
+
+export type CommentData = {
+  id: string,
+  rating: number,
+  comment: string,
+}

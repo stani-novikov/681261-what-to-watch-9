@@ -66,10 +66,10 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
         </svg>
       </div>
 
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{background: currentFilm.backgroundColor}}>
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src={currentFilm.backgroundImage} alt="The Grand Budapest Hotel"/>
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -86,7 +86,7 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={generatePath(AppRoute.Film, {id: String(currentFilm.id)})} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                  <Link to={generatePath(AppRoute.Film, {id: String(currentFilm.id)})} className="breadcrumbs__link">{currentFilm.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>

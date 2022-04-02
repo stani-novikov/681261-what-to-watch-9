@@ -5,11 +5,12 @@ import {
   requireAuthorization,
   toggleFilmsLoadingFlag,
   changeLoginRequestStatus,
-  setUserData
+  setUserData, setFilmData, changeFilmRequestStatus, setSimilarFilms, setFilmComments
 } from './action';
 import { Film } from '../types/films';
-import {AuthorizationStatus, LoginRequestStatus} from '../const';
+import {AuthorizationStatus, FilmRequestStatus, LoginRequestStatus} from '../const';
 import {UserData} from '../types/user';
+import {Review} from '../types/review';
 
 export type StoreState = {
   genre: string;
@@ -17,7 +18,11 @@ export type StoreState = {
   isFilmsLoaded: boolean;
   authorizationStatus: string;
   loginRequestStatus: string;
-  user: UserData | null ;
+  filmRequestStatus: string;
+  user: UserData | null;
+  film: Film | undefined;
+  similarFilms: Film[] | null;
+  filmComments: Review[] | null;
 }
 
 const initialState: StoreState = {
@@ -26,7 +31,11 @@ const initialState: StoreState = {
   isFilmsLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   loginRequestStatus: LoginRequestStatus.IDLE,
+  filmRequestStatus: FilmRequestStatus.IDLE,
   user: null,
+  film: undefined,
+  similarFilms: null,
+  filmComments: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -48,7 +57,18 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUserData, (state, action) => {
       state.user = action.payload;
-      localStorage.setItem('user-avatar', action.payload.avatarUrl);
+    })
+    .addCase(setFilmData, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(changeFilmRequestStatus, (state, action) => {
+      state.filmRequestStatus = action.payload;
+    })
+    .addCase(setSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(setFilmComments, (state, action) => {
+      state.filmComments = action.payload;
     });
 });
 

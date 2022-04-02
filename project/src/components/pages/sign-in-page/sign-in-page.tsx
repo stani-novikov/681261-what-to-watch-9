@@ -4,7 +4,6 @@ import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, LoginRequestStatus} from '../../../const';
 import { loginAction } from '../../../store/api-actions';
 import {StoreState} from '../../../store/reducer';
-import Spinner from '../../spinner/spinner';
 
 function SignInPage(): JSX.Element | null {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -17,8 +16,6 @@ function SignInPage(): JSX.Element | null {
   if (authorizationStatus === AuthorizationStatus.Auth) {
     navigate(AppRoute.Root);
     return null;
-  } else if (authorizationStatus === AuthorizationStatus.Unknown) {
-    return <Spinner/>;
   }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {

@@ -1,4 +1,4 @@
-import {Link, generatePath} from 'react-router-dom';
+import {Link, generatePath, useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import Videoplayer from '../videoplayer/videoplayer';
 import {Film} from '../../types/films';
@@ -12,6 +12,7 @@ type FilmCardProps = {
 function FilmCard(props: FilmCardProps): JSX.Element {
   const {film, setActiveCard} = props;
   const [isPlaying, setPlayState] = useState(false);
+  const navigate = useNavigate();
 
   const handleCardMouseOver = () => {
     setActiveCard(film.id);
@@ -23,11 +24,16 @@ function FilmCard(props: FilmCardProps): JSX.Element {
     setPlayState(false);
   };
 
+  const handleFilmCardClick = () => {
+    navigate(`/films/${film.id}`);
+  };
+
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseOver={() => {handleCardMouseOver();}}
       onMouseLeave={() => {handleCardMouseLeave();}}
+      onClick={() => {handleFilmCardClick();}}
     >
       <div className="small-film-card__image">
         <Videoplayer

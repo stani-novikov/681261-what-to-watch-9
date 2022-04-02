@@ -12,7 +12,7 @@ function UserBlock(): JSX.Element {
   const logoutClickHandler = () => {
     dispatch(logoutAction());
   };
-  const userAvatar = localStorage.getItem('user-avatar');
+  const userAvatar = useSelector((state: StoreState) => state.user?.avatarUrl);
   return (
     <ul className="user-block">
       {
